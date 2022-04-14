@@ -1,0 +1,36 @@
+@use '../../scss/' as *;
+
+.header {
+    @include flex(center,unset);
+    flex-direction:column;
+    padding-top: 10rem;
+    &-titles {
+        @include flex(center,flex-start);
+        flex-direction:column;
+        position: absolute;
+        width: 100%;  
+        top: 120px;   
+        font-family: 'Lora', serif;
+        &__sm,&__lg {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #444;
+            z-index: 98;
+            line-height:1;
+            
+            @include mobile {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    &-img {
+        background-image: url(./../../assets/img/headerbg.jpg);
+        height: 500px;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: brightness(90%);
+    }
+}

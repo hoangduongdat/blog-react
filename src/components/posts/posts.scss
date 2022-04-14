@@ -1,0 +1,11 @@
+@use '../../scss/' as *;
+
+.posts {
+    @include flex(center,center);
+    flex-wrap: wrap;
+    gap: 40px;
+    flex:9;
+    padding: 2rem;
+    margin-top: 3rem;
+
+}
