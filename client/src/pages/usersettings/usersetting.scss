@@ -1,0 +1,108 @@
+@use '../../scss/' as *;
+
+.usersetting {
+    @include flex(unset,unset);
+
+    &-wrapper {
+        flex: 9;
+        padding : 3rem;
+
+        &__title {
+            @include flex(center,space-between);
+
+            &-update {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+                color: lightcoral;
+            }
+
+            &-delete {
+                cursor: pointer;
+                color: red;
+                border-bottom: 1px solid;
+            }
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+
+            &-picture {
+                @include flex(unset,unset);
+                margin: 10px 0;
+
+                &>img {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 20px;
+                    object-fit: cover;
+                }
+                &> label {
+                    @include flex(center,center);
+                }
+                &> label >i {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    color: white;
+                    @include flex(center,center);
+                    background-color: lightcoral;
+                    margin-left: 10px;
+                    cursor: pointer;
+                    position: relative;
+
+                    &::after {
+                        content: "New Pic";
+                        width: 60px;
+                        padding: 3px;
+                        font-size: 0.7rem;
+                        position: absolute;
+                        top: -20px;
+                        right: -60px;
+                        background-color: lightcoral;
+                        border-radius: 4px;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.7s ease 0s;
+                    }
+                    &:hover::after {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+
+            &> label {
+                font-size: 1.5rem;
+                margin-top: 20px;
+                color: #444;
+            }
+
+            &> input {
+                color: gray;
+                margin: 10px 0;
+                height:30px;
+                border: none;
+                border-bottom: 1px solid lightgray;
+            }
+
+            &-submit {
+                width: 150px;
+                align-self: center;
+                border: none;
+                border-radius: 10px;
+                color: white;
+                background-color: teal;
+                padding: 10px;
+                cursor: pointer;
+                margin-top: 20px;
+                font-size: 1.2rem;
+                box-shadow: $box-shadow;
+                transition: transform .3s ease 0s;
+                &:hover {
+                    transform: translateY(-4px);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+@use '../../scss/' as *;
+
+.posts {
+    // @include flex(center,center);
+    // flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(420px,1fr));
+    justify-items:center;
+    gap: 40px;
+    flex:9;
+    padding: 2rem;
+    margin-top: 3rem;
+    @include tablet {
+        justify-content: space-evenly;
+        gap: 30px;
+        padding :1rem;
+        grid-template-columns: repeat(auto-fill,minmax(340px,1fr));
+    }
+
+    @include mobile {
+        grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    }
+   
+
+}

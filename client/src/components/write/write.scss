@@ -1,0 +1,73 @@
+@use '../../scss/' as *;
+
+.write {
+    padding-top: 50px;
+    margin-left: 100px;
+    
+    &-img {
+        width: 80vw;
+        height: 350px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 10px;
+    }
+
+    &-form {
+        position: relative;
+
+
+        &__group {
+  
+            @include flex(center,unset);
+            width: 100vw;
+
+
+            &> label >i {
+                width: 25px;
+                height: 25px;
+                border-radius:50%;
+                border: 1px solid;
+                @include flex(center,center);
+                font-size: 1.5rem;
+                margin-right: 5px;
+                color: gray;
+                cursor: pointer;
+            }
+
+            &-input {
+                font-size: 2rem;
+                border:none;
+                width: 80vw;
+                padding: 20px;
+            }
+            &-content {
+                width: 80vw !important;
+                height: 400px !important;
+                border: none;
+                padding: 20px;
+                font-size: 1.2rem;
+
+                &:focus {
+                    outline:none;
+                }
+            }
+        }
+
+        &__submit {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            color: white;
+            background-color: teal;
+            padding:8px 12px;
+            border :none;
+            border-radius:5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform .5s ease;
+            &:hover {
+                transform: translateY(-3px);
+            }
+        }
+    }
+}
