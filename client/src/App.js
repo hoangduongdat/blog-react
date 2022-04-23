@@ -14,30 +14,30 @@ import Register from './pages/register/Register';
 
 
 function App() {
-  const user =true;
+  const user = false;
   return (
     <>
-    <BrowserRouter>
-      <TopBar/>
-      <Routes>
-        {/* <Route path="/" exact  element={<Home/>}> */}
-          <Route path="/" exact  element={<Home/>}/>
+      <BrowserRouter>
+        <TopBar />
+        <Routes>
+          {/* <Route path="/" exact  element={<Home/>}> */}
+          <Route path="/" exact element={<Home />} />
 
-          <Route path="/post/:postId" element={<SinglePage/>}/>
+          <Route path="/post/:postId" element={<SinglePage />} />
 
-          <Route path="/write" element={user ? <WritePage/> : <Login/>}/>
+          <Route path="/write" element={user ? <WritePage /> : <Login />} />
 
-          <Route path="/setting" element={user ? <UserSetting/> : <Login/>}/>
+          <Route path="/setting" element={user ? <UserSetting /> : <Login />} />
 
-          <Route path="/login" element={user ? <Home/> : <Login/>} />
+          <Route path="/login" element={user ? <Home /> : <Login />} />
 
-          <Route path="/register" element={user ? <Home/> : <Register/>}/>
+          <Route path="/register" element={user ? <Home /> : <Register />} />
 
-        {/* </Route> */}
-      </Routes>
-    </BrowserRouter>
-     
-      
+          {/* </Route> */}
+        </Routes>
+      </BrowserRouter>
+
+
     </>
   );
 }

@@ -95,6 +95,7 @@
                 width: 100%;
                 @include flex(center,space-evenly);
                 z-index: 9999;
+                display: none;
             }
 
             &.active {

@@ -3,9 +3,10 @@ const mongoose = require('mongoose')
 const CategorySchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     }
-},{timestamps : true})
+}, { timestamps: true })
 
 
-module.exports = mongoose.model('Category',CategorySchema)
+module.exports = mongoose.model('Category', CategorySchema)

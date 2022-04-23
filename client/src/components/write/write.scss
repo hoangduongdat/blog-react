@@ -3,6 +3,11 @@
 .write {
     padding-top: 50px;
     margin-left: 100px;
+    @include tablet {
+        @include flex(center,center);
+        flex-direction: column;
+        margin-left:0;
+    }
     
     &-img {
         width: 80vw;
@@ -10,16 +15,25 @@
         object-fit: cover;
         object-position: top;
         border-radius: 10px;
+
+        @include mobile {
+            
+            width: 100%;
+            height: 200px;
+        }
     }
 
     &-form {
         position: relative;
+        @include mobile {
+           padding: 1rem;
+        }
 
 
         &__group {
   
             @include flex(center,unset);
-            width: 100vw;
+            width: 100%;
 
 
             &> label >i {

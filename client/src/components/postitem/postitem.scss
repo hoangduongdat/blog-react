@@ -1,15 +1,8 @@
 @use '../../scss/' as *;
 
 .postitem {
-    width: 500px;
+    width: 100%;
     padding: 0rem 1rem 1rem 1rem;
-    @include tablet {
-        max-width: 340px;
-    }
-    @include mobile {
-        
-        max-width: 320px;
-    }
    
     box-shadow: $box-shadow;
     border-radius: 20px;
