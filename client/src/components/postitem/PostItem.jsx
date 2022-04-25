@@ -1,33 +1,37 @@
 import React from 'react';
 import './postitem.scss'
+import { useSelector } from 'react-redux'
 
 import HeaderImg from './../../assets/img/headerbg.jpg'
 
-const PostItem = () => {
-    return (
-        <div className="postitem">
-            <img className="postitem-img" src={HeaderImg} alt="" />
-            <div className="postitem-info">
-                <div className="postitem-info__cats">
-                    <span>Music</span>
-                    <span>Life</span>
-                </div>
-                <span className="postitem-info__title">
-                    lorem Ips y Argument ofci
-                </span>
-                <hr />
-                <span className="postitem-info__date">1 hour ago</span>
-            </div>
+const PostItem = ({ post }) => {
+    const loading = useSelector(state => state.posts.loading.posts)
 
-            <p className="postitem-description">
-                lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem
-                lorem Ips y Argument ofci lorem lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem
-                lorem Ips y Argument ofci lorem lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem
-                lorem Ips y Argument ofci lorem lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem
-                lorem Ips y Argument ofci lorem lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem Ips y Argument ofci lorem
-                lorem Ips y Argument ofci lorem
-            </p>
-        </div>
+    return (
+        <>
+            {loading ? <span className="skeleton-box img "> </span> : (
+                <div className="postitem">
+                    <img className="postitem-img" src={post.photo || HeaderImg} alt="" />
+                    <div className="postitem-info">
+                        <div className="postitem-info__cats">
+                            {post.categories.map((category, index) => (
+                                <span key={index}>{category}</span>
+                            ))}
+
+                        </div>
+                        <span className="postitem-info__title">
+                            {post.title}
+                        </span>
+                        <hr />
+                        <span className="postitem-info__date">{new Date(post.createdAt).toDateString()}</span>
+                    </div>
+
+                    <p className="postitem-description">
+                        {post.desc}
+                    </p>
+                </div>
+            )}
+        </>
     );
 };
 

@@ -1,4 +1,5 @@
 import './app.scss'
+import { useSelector } from 'react-redux';
 import TopBar from './components/topbar/TopBar';
 import Home from './pages/home/Home';
 import SinglePage from './pages/singlepage/SinglePage';
@@ -14,7 +15,10 @@ import Register from './pages/register/Register';
 
 
 function App() {
-  const user = false;
+  const user = useSelector(state => state.auth.user);
+  if (user) {
+    localStorage.setItem("user", JSON.stringify(user))
+  }
   return (
     <>
       <BrowserRouter>

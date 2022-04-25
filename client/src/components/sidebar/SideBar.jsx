@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './sidebar.scss'
 import HeaderImg from './../../assets/img/headerbg.jpg'
+
+import { getCategories } from '../../redux/categoriesSlice'
+import { Link } from 'react-router-dom';
 const SideBar = () => {
+    const dispatch = useDispatch();
+    const { categories, loading } = useSelector(state => state.cate)
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [])
     return (
         <div className="sidebar">
             <div className="sidebar-item">
@@ -13,12 +22,14 @@ const SideBar = () => {
             <div className="sidebar-item">
                 <span className="sidebar-item__title">Categories</span>
                 <ul className="sidebar-item__list">
-                    <li><a href="#">Life</a></li>
-                    <li><a href="#">Music</a></li>
-                    <li><a href="#">Style</a></li>
-                    <li><a href="#">Sport</a></li>
-                    <li><a href="#">Tech</a></li>
-                    <li><a href="#">Cinema</a></li>
+                    {
+                        categories.map((category, index) => (
+                            loading ? (<span key={index} className="skeleton-box "></span>) :
+                                <li key={index}>
+                                    <Link to={`/?cat=${category.name}`}>{category.name}</Link>
+                                </li>
+                        ))
+                    }
                 </ul>
             </div>
             <div className="sidebar-item">

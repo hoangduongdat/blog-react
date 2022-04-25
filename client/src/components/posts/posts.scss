@@ -10,6 +10,11 @@
     flex:9;
     padding: 2rem 4rem;
     margin-top: 3rem;
+
+    & > a {
+        width: 100%;
+        max-width: 420px;
+    }
     @include tablet {
         justify-content: space-evenly;
         gap: 30px;
