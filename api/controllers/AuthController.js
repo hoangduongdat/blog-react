@@ -24,12 +24,13 @@ class AuthController {
   // [post] /api/auth/logind
 
   async login(req, res) {
-    console.log(req.body)
     try {
       const user = await User.findOne({ username: req.body.username }).exec();
+
       !user && res.status(400).json("Wrong credentials1");
       if (user) {
         const validdated = await bcrypt.compare(req.body.password, user.password);
+        console.log(user)
 
         !validdated && res.status(400).json("Wrong credentials2");
 

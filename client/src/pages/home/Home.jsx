@@ -4,13 +4,15 @@ import './home.scss'
 import Posts from './../../components/posts/Posts';
 import SideBar from './../../components/sidebar/SideBar';
 
+
 const Home = () => {
+
     return (
         <>
-            <Header/>
+            <Header />
             <div className="home">
-                <Posts/>
-                <SideBar/>
+                <Posts />
+                <SideBar />
             </div>
         </>
     );

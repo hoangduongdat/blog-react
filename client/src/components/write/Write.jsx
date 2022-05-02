@@ -1,45 +1,78 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import './write.scss'
+import { useNavigate } from 'react-router-dom'
 
 import HeaderImg from './../../assets/img/headerbg.jpg'
 import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
-const Write = () => {
+const Write = ({ postUpdate }) => {
+    const navigate = useNavigate()
     const [file, setFile] = useState(null)
-    const [title, setTitle] = useState("")
-    const [desc, setDesc] = useState("")
+    const [title, setTitle] = useState(postUpdate ? postUpdate.title : "")
+    const [desc, setDesc] = useState(postUpdate ? postUpdate.desc : "")
     const user = useSelector(state => state.auth.user)
-    console.log(user.username)
+    const PF = "http://localhost:5000/images/"
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const newPost = {
-            title,
-            desc,
-            username: user.username
-        }
-        if (file) {
-            const data = new FormData()
-            const filename = Date.now() + file.name
-            data.append("name", filename)
-            data.append("file", file)
-            newPost.photo = filename
+        // if update-----
+        if (postUpdate) {
+            const newPost = {
+                postId: postUpdate._id,
+                title,
+                desc,
+                username: user.username
+            }
+            if (file) {
+                const data = new FormData()
+                const filename = uuidv4() + file.name
+                data.append("name", filename)
+                data.append("file", file)
+                newPost.photo = filename
+                try {
+                    await axios.post("/upload", data)
+                } catch (err) { }
+            }
             try {
-                await axios.post("/upload", data)
+                const res = await axios.put(`/posts/${postUpdate._id}`, newPost)
+                navigate("/")
+            } catch (err) { }
+        } else { // if post-------
+            const newPost = {
+                title,
+                desc,
+                username: user.username
+            }
+            if (file) {
+                const data = new FormData()
+                const filename = uuidv4() + file.name
+                data.append("name", filename)
+                data.append("file", file)
+                newPost.photo = filename
+                try {
+                    await axios.post("/upload", data)
+                } catch (err) { }
+            }
+
+            try {
+                const res = await axios.post("/posts", newPost)
+                navigate("/")
             } catch (err) { }
         }
-        try {
-            const res = await axios.post("/posts", newPost)
-        } catch (err) { }
+
     }
     return (
         <div className="write">
-            {file && <img className="write-img" src={URL.createObjectURL(file) || HeaderImg} alt="" />}
+            {file ? <img className="write-img" src={URL.createObjectURL(file) || HeaderImg} alt="" /> : (
+                postUpdate && (<img className="write-img" src={PF + postUpdate.photo || HeaderImg} alt="" />)
+            )}
 
-            <form className="write-form" action="/" onSubmit={handleSubmit}>
+            <form className="write-form" action='/' onSubmit={handleSubmit}>
                 <div className="write-form__group">
                     <label htmlFor="fileInput">
-                        <i className="fa fa-plus"></i>
+                        <i className="fa fa-plus"></i> add image
                     </label>
                     <input
                         type="file"
@@ -52,7 +85,7 @@ const Write = () => {
                         className="write-form__group-input"
                         placeholder="Title..."
                         autoFocus={true}
-                        value={title}
+                        value={title ? title : postUpdate && postUpdate.title}
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
@@ -61,12 +94,12 @@ const Write = () => {
                         placeholder="Tell your story..."
                         type="text"
                         className="write-form__group-content"
-                        value={desc}
+                        value={desc ? desc : postUpdate && postUpdate.desc}
                         onChange={e => setDesc(e.target.value)}
                     ></textarea>
                 </div>
 
-                <button type="submit" className="write-form__submit">Publish</button>
+                <button type="submit" className="write-form__submit">{postUpdate ? 'Update' : 'Publish'}</button>
             </form>
         </div>
     );

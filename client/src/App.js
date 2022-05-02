@@ -31,7 +31,7 @@ function App() {
 
           <Route path="/write" element={user ? <WritePage /> : <Login />} />
 
-          <Route path="/setting" element={user ? <UserSetting /> : <Login />} />
+          <Route path="/users/:id" element={user ? <UserSetting /> : <Login />} />
 
           <Route path="/login" element={user ? <Home /> : <Login />} />
 

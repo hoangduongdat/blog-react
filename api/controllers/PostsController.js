@@ -1,5 +1,7 @@
 const Post = require("../models/Post")
 const User = require("../models/User")
+const fs = require('fs');
+const path = require('path');
 
 
 class PostsController {
@@ -49,10 +51,11 @@ class PostsController {
         }
     }
     async updatePost(req, res) {
-
+        console.log(req.body, req.params.id)
         if (req.body.postId === req.params.id) {
             try {
                 const post = await Post.findById(req.params.id);
+                console.log(post)
                 if (post.username === req.body.username) {
                     try {
                         const updatePost = await Post.findByIdAndUpdate(req.params.id, {
@@ -60,6 +63,7 @@ class PostsController {
                         }, { new: true });
                         res.status(200).json(updatePost);
                     } catch (err) {
+
                         res.status(500).json(err);
                     }
                 }
@@ -67,6 +71,7 @@ class PostsController {
                     res.status(401).json("you can update only your post!");
                 }
             } catch (err) {
+                console.error(err);
                 res.status(500).json(err);
             }
         } else {
@@ -82,6 +87,14 @@ class PostsController {
                     try {
                         // const deletePost = await Post.deleteOne({ id: req.params.id })
                         await post.delete();
+                        if (req.body.filename) {
+                            console.log(req.body.filename)
+                            try {
+                                fs.unlink(path.join("./images/", req.body.filename), function (response) {
+                                    // handle the callback
+                                });
+                            } catch (err) { }
+                        }
                         res.status(200).json("post has been deleted");
                     } catch (err) {
                         res.status(500).json(err);

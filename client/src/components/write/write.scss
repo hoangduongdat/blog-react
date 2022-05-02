@@ -13,7 +13,7 @@
         width: 80vw;
         height: 350px;
         object-fit: cover;
-        object-position: top;
+        object-position: cover;
         border-radius: 10px;
 
         @include mobile {
@@ -33,9 +33,16 @@
         &__group {
   
             @include flex(center,unset);
+            flex-direction: column;
             width: 100%;
 
-
+           
+            &> label {
+                width: 100%;
+                @include flex(center,center);
+                color: gray;
+                font-size: 1.5rem;
+            }
             &> label >i {
                 width: 25px;
                 height: 25px;
@@ -50,6 +57,12 @@
 
             &-input {
                 font-size: 2rem;
+                border:none;
+                width: 100%;
+                padding: 20px;
+            }
+            &-subtitle {
+                font-size: 1.5rem;
                 border:none;
                 width: 80vw;
                 padding: 20px;

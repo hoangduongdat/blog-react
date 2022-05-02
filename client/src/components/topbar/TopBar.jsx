@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import Avatar from '../../assets/img/boy.jpg'
@@ -31,6 +31,7 @@ const TopBar = () => {
 
     const [toggleMenu, setToggleMenu] = useState(false)
 
+
     const handleToggleMenu = () => {
         setToggleMenu(toggleMenu => !toggleMenu);
     }
@@ -38,7 +39,7 @@ const TopBar = () => {
     const handleLogout = () => {
         dispatch(authSlice.actions.logout())
     }
-
+    const PF = "http://localhost:5000/images/"
     return (
         <div className="topbar">
             <div className="topbar-left">
@@ -58,7 +59,9 @@ const TopBar = () => {
 
             </ul>
             <div className="topbar-right">
-                {user ? <Link to="/setting"><img className="topbar-right__avatar" src={Avatar} alt="" /></Link> : (
+                {user ? <Link to={`/users/${user._id}`}>
+                    <img className="topbar-right__avatar" src={(user.profilePicture && PF + user.profilePicture) || Avatar} alt="" />
+                </Link> : (
                     <>
                         <ul className={`topbar-right__menu ${toggleMenu && 'active'} `}>
                             <li onClick={handleToggleMenu}><Link to='/login'>Login </Link></li>

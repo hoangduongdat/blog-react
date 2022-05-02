@@ -88,7 +88,7 @@
             @include flex(center,space-evenly);
 
             @include tablet {
-                position: fixed;
+                position: sticky;
                 bottom: 100px;
                 left: 50%;
                 transform: translateX(-50%);

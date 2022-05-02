@@ -10,6 +10,7 @@ class UserController {
         req.body.password = await bcrypt.hash(req.body.password, salt);
       }
       try {
+
         const updateUser = await User.findByIdAndUpdate(req.params.id, {
           $set: req.body,
         }, { new: true });
@@ -20,6 +21,7 @@ class UserController {
       }
     }
   }
+
   async delete(req, res) {
     if (req.body.userId === req.params.id) {
       try {
@@ -43,8 +45,6 @@ class UserController {
   }
   // get user by id
   async getUser(req, res) {
-
-
     try {
       const user = await User.findById(req.params.id);
       const { password, ...others } = user._doc;
