@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import Avatar from '../../assets/img/boy.jpg'
 import authSlice from '../../redux/authSlice'
+import { PF } from '../../constant'
 
 import './topbar.scss'
 const menuNav = [{
@@ -39,7 +40,6 @@ const TopBar = () => {
     const handleLogout = () => {
         dispatch(authSlice.actions.logout())
     }
-    const PF = "http://localhost:5000/images/"
     return (
         <div className="topbar">
             <div className="topbar-left">

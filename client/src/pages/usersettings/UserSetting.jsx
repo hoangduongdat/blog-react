@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import authSlice, { login } from './../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { PF } from './../../constant'
 const UserSetting = () => {
     const [file, setFile] = useState(null)
 
@@ -65,7 +66,7 @@ const UserSetting = () => {
             navigate('/')
         } catch (err) { console.log(err) }
     }
-    const PF = "http://localhost:5000/images/"
+
     return (
         <div className="usersetting">
             <div className="usersetting-wrapper">

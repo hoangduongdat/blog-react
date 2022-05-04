@@ -6,15 +6,16 @@ import { useNavigate } from 'react-router-dom'
 import HeaderImg from './../../assets/img/headerbg.jpg'
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import SelectList from './../selectedlist/SelectList';
+import { PF } from '../../constant'
 
 const Write = ({ postUpdate }) => {
     const navigate = useNavigate()
     const [file, setFile] = useState(null)
     const [title, setTitle] = useState(postUpdate ? postUpdate.title : "")
     const [desc, setDesc] = useState(postUpdate ? postUpdate.desc : "")
+    const [categories, setCategories] = useState([])
     const user = useSelector(state => state.auth.user)
-    const PF = "http://localhost:5000/images/"
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         // if update-----
@@ -23,6 +24,7 @@ const Write = ({ postUpdate }) => {
                 postId: postUpdate._id,
                 title,
                 desc,
+                categories,
                 username: user.username
             }
             if (file) {
@@ -36,13 +38,14 @@ const Write = ({ postUpdate }) => {
                 } catch (err) { }
             }
             try {
-                const res = await axios.put(`/posts/${postUpdate._id}`, newPost)
+                await axios.put(`/posts/${postUpdate._id}`, newPost)
                 navigate("/")
             } catch (err) { }
         } else { // if post-------
             const newPost = {
                 title,
                 desc,
+                categories,
                 username: user.username
             }
             if (file) {
@@ -57,7 +60,7 @@ const Write = ({ postUpdate }) => {
             }
 
             try {
-                const res = await axios.post("/posts", newPost)
+                await axios.post("/posts", newPost)
                 navigate("/")
             } catch (err) { }
         }
@@ -65,9 +68,13 @@ const Write = ({ postUpdate }) => {
     }
     return (
         <div className="write">
+
             {file ? <img className="write-img" src={URL.createObjectURL(file) || HeaderImg} alt="" /> : (
                 postUpdate && (<img className="write-img" src={PF + postUpdate.photo || HeaderImg} alt="" />)
             )}
+
+
+
 
             <form className="write-form" action='/' onSubmit={handleSubmit}>
                 <div className="write-form__group">
@@ -80,6 +87,7 @@ const Write = ({ postUpdate }) => {
                         style={{ display: 'none' }}
                         onChange={e => setFile(e.target.files[0])}
                     />
+                    <SelectList setCategories={setCategories} />
                     <input
                         type="text"
                         className="write-form__group-input"

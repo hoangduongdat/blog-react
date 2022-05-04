@@ -10,13 +10,13 @@ const SideBar = () => {
     const { categories, loading } = useSelector(state => state.cate)
     useEffect(() => {
         dispatch(getCategories())
-    }, [])
+    }, [dispatch])
     return (
         <div className="sidebar">
             <div className="sidebar-item">
                 <span className="sidebar-item__title">About Me</span>
                 <img src={HeaderImg} alt="" />
-                <p>lorem ipsum dolor sit amet lorem, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu Lorem ipsum dolor sit amet</p>
+                <p>“Life is like riding a bicycle. To keep your balance, you must keep moving.” ―――― Albert Einstein ――――</p>
             </div>
 
             <div className="sidebar-item">

@@ -3,6 +3,7 @@ import Header from '../../components/header/Header';
 import './home.scss'
 import Posts from './../../components/posts/Posts';
 import SideBar from './../../components/sidebar/SideBar';
+import Footer from './../../components/footer/Footer';
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
                 <Posts />
                 <SideBar />
             </div>
+            <Footer />
         </>
     );
 };

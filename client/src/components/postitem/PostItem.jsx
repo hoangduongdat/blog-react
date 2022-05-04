@@ -1,13 +1,12 @@
 import React from 'react';
 import './postitem.scss'
 import { useSelector } from 'react-redux'
+import { PF } from '../../constant'
 
 import HeaderImg from './../../assets/img/headerbg.jpg'
 
 const PostItem = ({ post }) => {
     const loading = useSelector(state => state.posts.loading.posts)
-    const PF = "http://localhost:5000/images/"
-
     return (
         <>
             {loading ? <span className="skeleton-box img "> </span> : (

@@ -4,6 +4,7 @@ import HeaderImg from './../../assets/img/headerbg.jpg'
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostDetail } from './../../redux/postsSlice';
+import { PF } from '../../constant'
 
 import axios from 'axios';
 import Write from '../write/Write';
@@ -12,7 +13,6 @@ const SinglePost = () => {
     const { postId } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const PF = "http://localhost:5000/images/"
 
     const postDetail = useSelector(state => state.posts.postDetail)
     const user = useSelector(state => state.auth.user)
@@ -52,7 +52,7 @@ const SinglePost = () => {
 
                         <h1 className="singlepost-wrapper__title">
                             {loading ? (<span className="skeleton-box small"></span>) : postDetail.title}
-                            {postDetail.username === user.username && (
+                            {postDetail.username === user?.username && (
                                 <div className="singlepost-wrapper__title-edit">
                                     <i onClick={handleEditPost} className="fa fa-edit"></i>
                                     <i onClick={handleDeletePost} className="fa fa-trash-alt"></i>
@@ -68,9 +68,9 @@ const SinglePost = () => {
                             <span className="singlepost-wrapper__info-date">{new Date(postDetail.createdAt).toDateString()}</span>
                         </div>
 
-                        <p className="singlepost-wrapper__content">
-                            {loading ? (<span className="skeleton-box"></span>) : postDetail.desc}
-                        </p>
+                        <div className="singlepost-wrapper__content">
+                            {loading ? (<span className="skeleton-box"></span>) : <div dangerouslySetInnerHTML={{ __html: postDetail.desc }} />}
+                        </div>
                     </div>
                 </div>
             )

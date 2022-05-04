@@ -94,12 +94,18 @@
                 transform: translateX(-50%);
                 width: 100%;
                 @include flex(center,space-evenly);
-                z-index: 9999;
+                z-index: 99999;
                 display: none;
+                height: 100vh;
+                overflow: hidden;
+                -ms-overflow-style: none; /* khai báo sử dụng Internet Explorer, Edge */
+                scrollbar-width: none; /* sử dụng Firefox */
+                overflow-y: scroll; 
             }
 
             &.active {
                 display: flex;
+                
             }
             &>* {
                padding : 6px 0;
